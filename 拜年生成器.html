@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拜年文安生成器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #d32f2f;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #d32f2f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>拜年文安生成器</h1>
+        <p>新年到，祝福到！快來生成專屬你的拜年祝福吧！</p>
+        
+        <label for="target">選擇對象：</label>
+        <select id="target">
+            <option value="長輩">長輩</option>
+            <option value="朋友">朋友</option>
+            <option value="同事">同事</option>
+            <option value="客戶">客戶</option>
+        </select>
+        
+        <label for="style">選擇風格：</label>
+        <select id="style">
+            <option value="傳統">傳統</option>
+            <option value="幽默">幽默</option>
+            <option value="文藝">文藝</option>
+            <option value="簡潔">簡潔</option>
+        </select>
+        
+        <label for="keyword">輸入關鍵字（例如：健康、財運、事業）：</label>
+        <input type="text" id="keyword" placeholder="輸入關鍵字">
+        
+        <button onclick="generateGreeting()">生成祝福</button>
+        
+        <div class="result" id="result">
+            <h3>生成的祝福語：</h3>
+            <p id="greetingText">在這裡顯示生成的祝福語。</p>
+        </div>
+    </div>
+
+    <script>
+        const greetings = {
+            長輩: {
+                傳統: ["恭祝您新年快樂，身體健康，福如東海，壽比南山！", "祝您新年吉祥如意，笑口常開，健康長壽，福壽安康！"],
+                幽默: ["新年到，祝您吃嘛嘛香，身體倍兒棒，紅包拿來！", "祝您新年快樂，越活越年輕，紅包越來越多！"],
+                文藝: ["歲月如詩，願您新年安康，笑顏如花，福壽綿長。", "願新年為您帶來無盡的喜悅與平安，歲月靜好。"],
+                簡潔: ["新年快樂，健康長壽！", "祝您新年幸福安康！"]
+            },
+            朋友: {
+                傳統: ["祝你新年快樂，萬事如意，心想事成！", "願你新年吉祥，財源廣進，幸福美滿！"],
+                幽默: ["新年快樂，祝你瘦成閃電，富得流油！", "祝你新年快樂，紅包收到手軟！"],
+                文藝: ["願新年為你帶來新的希望與美好，友誼長存。", "新的一年，願你心中有光，腳下有路。"],
+                簡潔: ["新年快樂，萬事如意！", "祝你新年幸福！"]
+            },
+            同事: {
+                傳統: ["祝你新年事業蒸蒸日上，工作順利！", "願你新年工作順心，步步高升！"],
+                幽默: ["新年快樂，祝你升職加薪，早日當上CEO！", "祝你新年工作輕鬆，老闆天天請吃飯！"],
+                文藝: ["願新年為你帶來事業的輝煌與內心的平靜。", "新的一年，願你在職場上乘風破浪，勇往直前。"],
+                簡潔: ["新年快樂，工作順利！", "祝你新年事業有成！"]
+            },
+            客戶: {
+                傳統: ["感謝您的支持，祝您新年生意興隆，財源廣進！", "祝您新年事業蒸蒸日上，合作愉快！"],
+                幽默: ["新年快樂，祝您訂單接到手軟，數錢數到手抽筋！", "祝您新年財源滾滾，生意紅火！"],
+                文藝: ["願新年為您帶來事業的輝煌與合作的共贏。", "新的一年，願我們攜手共進，共創美好未來。"],
+                簡潔: ["新年快樂，生意興隆！", "祝您新年財源廣進！"]
+            }
+        };
+
+        function generateGreeting() {
+            const target = document.getElementById('target').value;
+            const style = document.getElementById('style').value;
+            const keyword = document.getElementById('keyword').value;
+
+            const targetGreetings = greetings[target][style];
+            const randomGreeting = targetGreetings[Math.floor(Math.random() * targetGreetings.length)];
+
+            const finalGreeting = randomGreeting.replace(/關鍵字/g, keyword);
+            document.getElementById('greetingText').textContent = finalGreeting;
+        }
+    </script>
+</body>
+</html>
